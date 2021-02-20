@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
     it "emailが@を含む必要がある" do
       @user.email = "11testtest"
       @user.valid?
-      expect(@user.errors.full_messages).to include("Email :＠ must be exit")
+      expect(@user.errors.full_messages).to include("Email is invalid", "Email :＠ must be exist")
     end
     it "passwordは、6文字以上での入力が必須" do
       @user.password = "aa111"
@@ -32,7 +32,13 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
-    it "passwordは、半角英数字混合での入力が必須である" do
+    it "passwordは、数字のみでは登録できない" do
+      @user.password = "111111"
+      @user.password_confirmation = "111111"  
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password Include both letters and numbers", "Password confirmation Include both letters and numbers")
+    end
+    it "passwordは、英数のみでは登録できない" do
       @user.password = "aaaaaa"
       @user.password_confirmation = "aaaaaa"  
       @user.valid?
