@@ -4,8 +4,6 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nickname
     validates :birth_date
-  end
-  with_options presence: true,format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: ':＠ must be exist' } do
     validates :email
   end
   with_options presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: 'Include both letters and numbers' } do
@@ -20,4 +18,6 @@ class User < ApplicationRecord
     validates :last_name_kana
     validates :first_name_kana
   end
+
+  has_many :items
 end
