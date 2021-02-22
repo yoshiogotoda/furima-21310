@@ -6,6 +6,7 @@ class Item < ApplicationRecord
     validates :name,length: {maximum: 40}
     validates :explain,length: {maximum: 400}
     validates :price, numericality: { greater_than: 300,less_than: 9999999 }
+    validates :image
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
