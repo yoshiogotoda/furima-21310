@@ -8,6 +8,7 @@ FactoryBot.define do
     prefecture_id            {Faker::Number.rand(1..47)}
     scheduled_delivery_id    {Faker::Number.rand(1..3)}
     price                    {Faker::Number.rand(300..9999999)}
+    id                       { 1 }
     association :user
 
     after(:build) do |item|

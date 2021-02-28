@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
+    @item = FactoryBot.build(:item)
+    @user = FactoryBot.build(:user)
     @order_address = FactoryBot.build(:order_address)
+    @order_address.item_id = @item.id
+    @order_address.user_id = @user.id
   end
   context '購入ができる' do
     it '必要な情報が入力されると購入できる' do
@@ -52,7 +56,12 @@ RSpec.describe OrderAddress, type: :model do
     it '電話番号にハイフンが含まれている' do
       @order_address.phone_number = '090-9999-9999'
       @order_address.valid?
-      expect(@order_address.errors.full_messages).to include("Phone number is invalid. Exclude hyphen(-)")
+      expect(@order_address.errors.full_messages).to include("Phone number is invalid.")
+    end
+    it '電話番号が11桁でない' do
+      @order_address.phone_number = '090999999999'
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Phone number is invalid.")
     end
     it 'ユーザーidが入力されていない' do
       @order_address.user_id = ''

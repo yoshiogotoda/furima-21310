@@ -4,12 +4,10 @@ class OrdersController < ApplicationController
   before_action :redirect_top_page,only: [:index,:create]
 
   def index
-    set_item
     @order_address = OrderAddress.new
   end
 
   def create
-    set_item
     @order_address = OrderAddress.new(order_params)
     
      if @order_address.valid?
@@ -41,7 +39,7 @@ class OrdersController < ApplicationController
   end
 
   def redirect_top_page
-    redirect_to root_path if current_user.id == @item.user_id
+    redirect_to root_path if current_user.id == @item.user_id || @item.order != nil
   end
 
  
