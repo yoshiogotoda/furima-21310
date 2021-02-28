@@ -8,6 +8,10 @@ RSpec.describe OrderAddress, type: :model do
     it '必要な情報が入力されると購入できる' do
       expect(@order_address).to be_valid
     end
+    it '建物名が空でも登録できる' do
+      @order_address.building = ''
+      expect(@order_address).to be_valid
+    end
   end
   context '購入ができない' do
     it 'Tokenが入力されていない' do
@@ -49,6 +53,16 @@ RSpec.describe OrderAddress, type: :model do
       @order_address.phone_number = '090-9999-9999'
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include("Phone number is invalid. Exclude hyphen(-)")
+    end
+    it 'ユーザーidが入力されていない' do
+      @order_address.user_id = ''
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("User can't be blank")
+    end
+    it 'アイテムidが入力されていない' do
+      @order_address.item_id = ''
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Item can't be blank")
     end
   end
 end
