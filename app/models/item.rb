@@ -1,13 +1,13 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one :order
-  has_one_attached :image
+  has_many_attached :images
 
   with_options presence: true do
     validates :name,length: {maximum: 40}
     validates :explain,length: {maximum: 400}
     validates :price, numericality: { greater_than: 300,less_than: 9999999 }
-    validates :image
+    validates :images
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
