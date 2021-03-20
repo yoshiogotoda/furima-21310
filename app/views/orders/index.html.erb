@@ -7,7 +7,11 @@
     </h1>
     
     <div class='buy-item-info'>
-      <%= image_tag @item.image, class: 'buy-item-img' %>
+    <div class="images">
+    <% @item.images.each do |image| %>
+      <%= image_tag image ,class:"item-box-img" %>
+    <% end %>
+    </div>
       <div class='buy-item-right-content'>
         <h2 class='buy-item-text'>
           <%= @item.name %>
