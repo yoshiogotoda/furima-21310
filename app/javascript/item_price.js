@@ -1,3 +1,4 @@
+if (document.URL.match( /new/ ) || document.URL.match( /edit/ )) {
 window.addEventListener('load', () => {
   const priceInput = document.getElementById("item-price")
 priceInput.addEventListener("input", () => {
@@ -8,3 +9,4 @@ priceInput.addEventListener("input", () => {
   totalPrice.innerHTML = Math.floor(inputValue - addTaxDom.innerHTML)
 })
 });
+}
