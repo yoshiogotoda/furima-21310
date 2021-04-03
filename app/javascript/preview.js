@@ -14,6 +14,7 @@ if (document.URL.match( /new/ ) || document.URL.match( /edit/ )) {
 
       const inputHTML = document.createElement('input')
       inputHTML.setAttribute('id',`item_image_${imageElementNum}`)
+      inputHTML.setAttribute('class',`image-element`)
       inputHTML.setAttribute('name','item[images][]')
       inputHTML.setAttribute('type','file')
 
