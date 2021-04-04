@@ -51,7 +51,11 @@ class ItemsController < ApplicationController
   end
 
   def redirect_top_page
-    redirect_to root_path unless current_user.id == @item.user_id
+    if current_user.id != @item.user_id
+      redirect_to root_path
+    elsif @item.order.id != nil
+      redirect_to root_path
+    end
   end
 
 end
